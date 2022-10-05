@@ -13,7 +13,7 @@ const Academic = () => {
         return(
             <Box w='100%' borderWidth='2px' borderColor={useColorModeValue('black','gray.300')} p={8} rounded='sm'>
                 <Flex>
-                    <Heading as='h1'>
+                    <Heading as='h1' fontFamily='mono'>
                         {schoolName}
                     </Heading>
                     <Spacer/>
@@ -25,10 +25,10 @@ const Academic = () => {
 
                 <Collapse in={!isOpen} animateOpacity>
                     <Box>
-                        <Text mt={5} fontSize='lg' fontWeight='bold'>{course}</Text>
-                        <Text mt={1}>CGPA: {gpa} / 4.00</Text>
+                        <Text mt={5} fontFamily='mono' fontSize='lg' fontWeight='bold'>{course}</Text>
+                        <Text mt={1} fontFamily='mono'>CGPA: {gpa} / 4.00</Text>
                         <Flex>
-                            <Text mt={1} fontStyle='italic'>{startDate} - {endDate}</Text>
+                            <Text mt={1} fontFamily='mono' fontStyle='italic'>{startDate} - {endDate}</Text>
                             <Spacer/>
 
                             {cert === undefined ?
@@ -66,7 +66,7 @@ const Academic = () => {
                 <AcademicCard
                     schoolName = 'Iowa State University'
                     course = 'BSc Software Engineering'
-                    gpa = '3.98'
+                    gpa = '3.97'
                     startDate = '2021'
                     endDate = '2023'
                 />

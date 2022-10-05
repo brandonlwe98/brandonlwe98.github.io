@@ -67,7 +67,7 @@ const Navbar = () => {
                     borderRadius={10}
                     alignSelf='center'
                     >
-                        <Heading fontSize={{ base: 'sm', md: 'xl' }}>{sectionName}</Heading>
+                        <Heading fontSize={{ base: 'sm', md: 'lg' }}>{sectionName}</Heading>
 
                     </Box>
 

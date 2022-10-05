@@ -133,7 +133,7 @@ const Home = () => {
                                     </Box>
                                 </Tooltip>
                                 <Tooltip label='NodeJS / SailsJS'>
-                                    <Box  className="hover:scale-110 hover:-rotate-45 duration-200">
+                                    <Box className="hover:scale-110 hover:-rotate-45 duration-200">
                                         <Icon as={FaNodeJs} w={iconSize} h={iconSize}/>
                                     </Box>
                                 </Tooltip>
