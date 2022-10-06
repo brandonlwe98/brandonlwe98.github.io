@@ -10,13 +10,13 @@ import Splask from './pages/projects/Splask'
 
 import React, { useEffect, useState } from 'react';
 import {Box, Container} from '@chakra-ui/react'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, HashRouter } from 'react-router-dom'
 
 function App() {
 
   return (
     <Box>
-        <BrowserRouter>
+        <HashRouter>
             <Navbar/>
             <Container mt="20" maxW='container.md'>
                 <Routes>
@@ -31,7 +31,7 @@ function App() {
                   <Route path='projects/splask' element={<Splask/>}/>
                 </Routes>
             </Container>
-        </BrowserRouter>
+        </HashRouter>
     </Box>
   );
 }

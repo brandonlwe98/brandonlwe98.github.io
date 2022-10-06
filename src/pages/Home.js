@@ -108,7 +108,7 @@ const Home = () => {
                                     </Box>
                                 </Tooltip>
                                 <Tooltip label='Springboot'>
-                                    <Box className="hover:scale-110 hover:rotate-90 duration-200">
+                                    <Box className="hover:scale-110 hover:rotate-180 duration-200">
                                         <Icon as={SiSpringboot} w={iconSize} h={iconSize}/>
                                     </Box>
                                 </Tooltip>
