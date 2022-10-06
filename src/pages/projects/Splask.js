@@ -3,7 +3,7 @@ import {HiArrowCircleLeft, HiArrowCircleRight} from 'react-icons/hi'
 import {useNavigate} from 'react-router-dom'
 import {projects as data_projects} from '../../components/Data'
 
-const Projects = () => {
+const Splask = () => {
     const navigate = useNavigate();
 
     function navigatePost(link, event){
@@ -11,7 +11,7 @@ const Projects = () => {
         navigate(link);
     }
 
-    var projectIndex = data_projects.findIndex(project => project.page === 'portfolio')
+    var projectIndex = data_projects.findIndex(project => project.page === 'splask')
     var prevIndex = projectIndex + 1
     var nextIndex = projectIndex -1
 
@@ -58,18 +58,14 @@ const Projects = () => {
                 </Stack>
                 <Box pt={4}>
                     <Text fontSize={{base:'26px', md:'35px'}} fontWeight='md' fontFamily='mono'>
-                        Self Portfolio Website
+                        Splask
                     </Text>
-                    <Text fontFamily='mono' textAlign='left'>October 2022</Text>
+                    <Text fontFamily='mono' textAlign='left'>Spring 2022</Text>
                 </Box>
 
                 <Box mt={6}>
                     <Text lineHeight={2}>
-                        I started a project of my own to create a portfolio website (what you're viewing now) where I could display
-                        my skills, information, and education. This website that you're currently viewing is
-                        built using <span className='animate-pulse'>ReactJS</span>, styled
-                        using <span className='animate-pulse'>ChakraUI </span> 
-                        and <span className='animate-pulse'>TailwindCSS</span> libraries.
+                        
                     </Text>
                     {/* <Text mt={5}>
                         
@@ -83,4 +79,4 @@ const Projects = () => {
 
 }
 
-export default Projects
+export default Splask

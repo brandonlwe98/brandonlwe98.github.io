@@ -5,6 +5,8 @@ import Projects from './pages/Projects'
 import Contact from './pages/Contact'
 import Portfolio from './pages/projects/Portfolio'
 import Wwf from './pages/projects/Wwf'
+import HowToPlay from './components/demo/wwf-demo/HowToPlay'
+import Splask from './pages/projects/Splask'
 
 import React, { useEffect, useState } from 'react';
 import {Box, Container} from '@chakra-ui/react'
@@ -25,6 +27,8 @@ function App() {
                   <Route path='contact' element={<Contact />} />
                   <Route path='projects/portfolio' element={<Portfolio/>}/>
                   <Route path='projects/wwf' element={<Wwf/>}/>
+                  <Route path='projects/wwf/howtoplay' element={<HowToPlay/>}/>
+                  <Route path='projects/splask' element={<Splask/>}/>
                 </Routes>
             </Container>
         </BrowserRouter>

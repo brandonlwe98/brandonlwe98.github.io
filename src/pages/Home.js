@@ -1,11 +1,11 @@
 import {Text, Heading, Box, VStack, Stack, Image, Icon, Progress, HStack, StackDivider, 
     Center, useColorModeValue, Tooltip, Collapse, useDisclosure, Spacer, Flex, IconButton
 } from '@chakra-ui/react'
-import { FaJava, FaHtml5, FaAngular, FaNodeJs } from 'react-icons/fa'
-import {SiJavascript, SiCss3, SiPhp, SiMysql, SiPython, SiSpringboot, SiChakraui} from 'react-icons/si'
+import { FaAngular, FaNodeJs } from 'react-icons/fa'
+import { SiChakraui, SiSpringboot} from 'react-icons/si'
 import {MdArrowDropUp, MdArrowDropDown} from 'react-icons/md'
-import {TbLetterC} from 'react-icons/tb'
 import {GrReactjs} from 'react-icons/gr'
+import {skillList as data_skilList} from '../components/Data'
 
 const Home = () => {
     
@@ -75,46 +75,16 @@ const Home = () => {
                     <Box borderWidth='2px' p={5} mt='5%' borderColor={useColorModeValue('black','gray.300')}>
                         <Collapse in={!isOpen} animateOpacity>
                             <VStack w='100%' divider={<StackDivider borderColor={useColorModeValue('black','gray.300')}/>} alignItems="center">
-                                <SkillCard
-                                    name='JavaScript'
-                                    icon={<Icon as={SiJavascript} w={45} h={45}/>}
-                                    percentage='90'
-                                />
-                                <SkillCard
-                                    name='HTML'
-                                    icon={<Icon as={FaHtml5} w={45} h={45}/>}
-                                    percentage='85'
-                                />
-                                <SkillCard
-                                    name='CSS'
-                                    icon={<Icon as={SiCss3} w={45} h={45}/>}
-                                    percentage='80'
-                                />
-                                <SkillCard
-                                    name='Java'
-                                    icon={<Icon as={FaJava} w={45} h={45}/>}
-                                    percentage='80'
-                                />
-                                <SkillCard
-                                    name='MySQL'
-                                    icon={<Icon as={SiMysql} w={45} h={45}/>}
-                                    percentage='80'
-                                />
-                                <SkillCard
-                                    name='PHP'
-                                    icon={<Icon as={SiPhp} w={45} h={45}/>}
-                                    percentage='70'
-                                />
-                                <SkillCard
-                                    name='C/C++'
-                                    icon={<Icon as={TbLetterC} w={45} h={45}/>}
-                                    percentage='60'
-                                />
-                                <SkillCard
-                                    name='Python'
-                                    icon={<Icon as={SiPython} w={45} h={45}/>}
-                                    percentage='60'
-                                />
+                                {data_skilList.map((skill, index) => {
+                                    return(
+                                        <SkillCard
+                                            key={index}
+                                            name={skill.name}
+                                            icon={skill.icon}
+                                            percentage={skill.percentage}
+                                        />
+                                    )
+                                })}
                             </VStack>
                         </Collapse>
                     </Box>

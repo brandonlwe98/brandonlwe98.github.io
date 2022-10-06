@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { MdMenu, MdOutlineDarkMode, MdClose } from 'react-icons/md'
 import { BsSun } from 'react-icons/bs'
 import { useLocation } from 'react-router-dom'
+import { sections as data_sections } from './Data'
 
 // import { Logo } from './Logo'
 
@@ -33,14 +34,9 @@ const Navbar = () => {
         'hover:bg-white hover:text-teal-600'
     )
 
-    let sections = [
-        {name:'Home', link: 'home'},
-        {name:'Academic', link: 'academic'},
-        {name:'Projects', link: 'projects'},
-        {name:'Contact', link: 'contact'}
-    ]
 
-    var sectionList = sections.map((item, index) => {
+
+    var sectionList = data_sections.map((item, index) => {
         return (
             <Section
                 sectionName={item.name}

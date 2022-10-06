@@ -1,15 +1,9 @@
-import {Grid, Heading, Box, VStack, Text, Stack, Link, StackDivider, useColorModeValue} from '@chakra-ui/react'
-import {Link as Navigate } from 'react-router-dom'
+import {Grid, Button, Box, VStack, Text, Stack, Link, StackDivider, useColorModeValue} from '@chakra-ui/react'
+import {Link as Navigate, useNavigate } from 'react-router-dom'
+import {projects as data_projects, works as data_works} from '../components/Data'
 
 const Projects = () => {
-    const projects = [{date:'2022', name:'Self Portfolio', page:'portfolio'},
-                      {date:'2022', name:'Wordle With Friends', page:'wwf'},
-                      {date:'2022', name:'Splask', page:'splask'},
-                      {date:'2020', name:'Inventory Management', page:'inventory'},]
-    
-    const works = [{date:'2020', name:'Richwood Ventures', page:'richwood'},
-                   {date:'2018-2019', name:'Dbix Systems', page:'dbix'},]
-
+    const navigate = useNavigate()
 
     return(
         <Box py={4}>
@@ -23,7 +17,7 @@ const Projects = () => {
                     <Stack direction='row' w={{base:'100%', md:'50%'}} px={5}>
                         <Box w='30%'>
                             <Text fontFamily='mono' fontWeight='bold' mb={4}>Date</Text>
-                            {projects.map((project, index) => {
+                            {data_projects.map((project, index) => {
                                 return(
                                     <Box mb={4} key={index}>
                                         <Text fontFamily='mono' fontStyle='italic'>{project.date}</Text>
@@ -35,10 +29,13 @@ const Projects = () => {
 
                         <Box w='70%' alignItems='left' mx='auto'>
                             <Text fontFamily='mono' fontWeight='bold' mb={4}>Title</Text>
-                            {projects.map((project, index) => {
+                            {data_projects.map((project, index) => {
                                 return(
                                     <Box mb={4} key={index}>
-                                        <Link as={Navigate} to={'/projects/' + project.page}>{project.name}</Link>
+                                        <Link onClick={(e) => {
+                                            e.preventDefault();
+                                            navigate('/projects/' + project.page, {projectIndex: index})}
+                                        }>{project.name}</Link>
                                     </Box>
                                 )
                             })}
@@ -53,7 +50,7 @@ const Projects = () => {
                     <Stack direction='row' w={{base:'100%', md:'50%'}} px={5}>
                         <Box w='30%'>
                             <Text mb={4} fontFamily='mono' fontWeight='bold'>Date</Text>
-                            {works.map((work, index) => {
+                            {data_works.map((work, index) => {
                                 return(
                                     <Text key={index} fontStyle='italic' mb={4}>{work.date}</Text>
                                 )
@@ -63,7 +60,7 @@ const Projects = () => {
 
                         <Box w='70%' alignItems='left' mx='auto'>
                             <Text fontFamily='mono' fontWeight='bold' mb={4}>Title</Text>
-                            {works.map((work, index)=> {
+                            {data_works.map((work, index)=> {
                                 return(
                                     <Box mb={4} key={index}>
                                         <Link as={Navigate} to={"/projects/"+work.page}>{work.name}</Link>    
