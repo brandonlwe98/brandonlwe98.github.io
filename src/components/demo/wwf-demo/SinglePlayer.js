@@ -32,6 +32,9 @@ const SinglePlayer = () => {
 		setTimeout(() => setAnimate(false), 1500)
 	}, [])
 
+	Toastr.options.closeButton = true;
+	Toastr.options.preventDuplicates = true;
+
 	useEffect(() => {
 		for (let i = 0; i < 26; i++) {
 			document.getElementById(
