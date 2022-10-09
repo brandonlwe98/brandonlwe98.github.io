@@ -3,7 +3,7 @@ import {HiArrowCircleLeft, HiArrowCircleRight} from 'react-icons/hi'
 import {useNavigate} from 'react-router-dom'
 import {projects as data_projects} from '../../components/Data'
 
-const Splask = () => {
+const Inventory = () => {
     const navigate = useNavigate();
 
     function navigatePost(link, event){
@@ -11,7 +11,7 @@ const Splask = () => {
         navigate(link);
     }
 
-    var projectIndex = data_projects.findIndex(project => project.page === 'splask')
+    var projectIndex = data_projects.findIndex(project => project.page === 'inventory')
     var prevIndex = projectIndex + 1
     var nextIndex = projectIndex -1
 
@@ -58,19 +58,24 @@ const Splask = () => {
                 </Stack>
                 <Box pt={4}>
                     <Text fontSize={{base:'26px', md:'35px'}} fontWeight='md' fontFamily='mono'>
-                        Splask
+                        Inventory Management
                     </Text>
-                    <Text fontFamily='mono' textAlign='left'>Spring 2022</Text>
+                    <Text fontFamily='mono' textAlign='left'>2020</Text>
                 </Box>
 
                 <Box mt={6}>
                     <Text lineHeight={2}>
-                        Splask, abbreviated from 'splitting tasks', is a mobile project/work management tool that can be used to keep track of projects and tasks.
-                        It is developed using <b>Android Studio</b> and <b>Springboot</b>. Users can register, login, create projects, tasks, and teams. There are chat rooms that
-                        are powered using WebSockets as well.
+                        During the Covid-19 pandemic, a friend of mine started an online business. He business process consisted of buying meat products,
+                        processing and packaging the meat, and delivering it to customers at our local area. His business soon grew larger, and so
+                        did his inventory tracking issues.
+                    </Text>
+                    <Text lineHeight={2} mt={5}>
+                        I proposed to help him out by creating a small inventory management application to help keep track of his stock. The project grew larger as requirements
+                        started increasing. The inventory management functioned to display overall sales, customer, stock, and delivery information. It's a web application powered
+                        using <b>PHP</b>, <b>JavaScript</b>, and <b>Bootstrap</b> . Data was stored and managed using a local MySQL database (<b>PHPMyAdmin, xampp</b>).
                     </Text>
                     <Box className='flex justify-center' mt={10}>
-                        <Image src={require('./splask-gif.gif')} alt="Spask GIF"/>
+                        <Image src={require('./inventory-gif.gif')} alt="Inventory GIF"/>
                     </Box>
                     {/* <Text mt={5}>
                         
@@ -84,4 +89,4 @@ const Splask = () => {
 
 }
 
-export default Splask
+export default Inventory

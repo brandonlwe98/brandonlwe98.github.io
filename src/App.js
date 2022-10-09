@@ -7,6 +7,9 @@ import Portfolio from './pages/projects/Portfolio'
 import Wwf from './pages/projects/Wwf'
 import HowToPlay from './components/demo/wwf-demo/HowToPlay'
 import Splask from './pages/projects/Splask'
+import Inventory from './pages/projects/Inventory'
+import Richwood from './pages/work/Richwood'
+import Dbix from './pages/work/Dbix'
 
 import React, { useEffect, useState } from 'react';
 import {Box, Container} from '@chakra-ui/react'
@@ -29,6 +32,9 @@ function App() {
                   <Route path='projects/wwf' element={<Wwf/>}/>
                   <Route path='projects/wwf/howtoplay' element={<HowToPlay/>}/>
                   <Route path='projects/splask' element={<Splask/>}/>
+                  <Route path='projects/inventory' element={<Inventory/>}/>
+                  <Route path='projects/richwood' element={<Richwood/>}/>
+                  <Route path='projects/dbix' element={<Dbix/>}/>
                 </Routes>
             </Container>
         </HashRouter>

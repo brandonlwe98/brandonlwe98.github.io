@@ -1,9 +1,10 @@
-import {Box, useColorModeValue, Text, Spacer, Stack, Tooltip, Icon, Image} from '@chakra-ui/react'
+import {Box, useColorModeValue, Text, Spacer, Stack, Tooltip, Icon, Link} from '@chakra-ui/react'
 import {HiArrowCircleLeft, HiArrowCircleRight} from 'react-icons/hi'
 import {useNavigate} from 'react-router-dom'
-import {projects as data_projects} from '../../components/Data'
+import {works as data_works} from '../../components/Data'
+import { ExternalLinkIcon } from '@chakra-ui/icons'
 
-const Splask = () => {
+const Richwood = () => {
     const navigate = useNavigate();
 
     function navigatePost(link, event){
@@ -11,22 +12,22 @@ const Splask = () => {
         navigate(link);
     }
 
-    var projectIndex = data_projects.findIndex(project => project.page === 'splask')
-    var prevIndex = projectIndex + 1
-    var nextIndex = projectIndex -1
+    var workIndex = data_works.findIndex(work => work.page === 'richwood')
+    var prevIndex = workIndex + 1
+    var nextIndex = workIndex -1
 
     return(
         <Box py={4} borderWidth='2px' borderColor={useColorModeValue('black','white')}>
             <Box px={5} pt={2} pb={5}>
                 <Stack direction='row'>
-                {prevIndex < data_projects.length ? 
+                {prevIndex < data_works.length ? 
                     (<Tooltip label='Previous Post'>
                         <Box>
                             <Icon as={HiArrowCircleLeft} w={{base:'24px', md:'32px'}} h={{base:'24px', md:'32px'}}
                                 className='hover:opacity-75 hover:scale-110 cursor-pointer'
                                 onClick={
                                     (e) => {
-                                        navigatePost('/projects/' + data_projects[prevIndex].page, e)
+                                        navigatePost('/projects/' + data_works[prevIndex].page, e)
                                     }
                                 }/>
                         </Box>
@@ -44,7 +45,7 @@ const Splask = () => {
                                         className='hover:opacity-75 hover:scale-110 cursor-pointer'
                                         onClick={
                                             (e) => {
-                                                navigatePost('/projects/' + data_projects[nextIndex].page, e)
+                                                navigatePost('/projects/' + data_works[nextIndex].page, e)
                                             }
                                         }/>
                                 </Box>
@@ -58,20 +59,17 @@ const Splask = () => {
                 </Stack>
                 <Box pt={4}>
                     <Text fontSize={{base:'26px', md:'35px'}} fontWeight='md' fontFamily='mono'>
-                        Splask
+                        Richwood Ventures
                     </Text>
-                    <Text fontFamily='mono' textAlign='left'>Spring 2022</Text>
+                    <Text fontFamily='mono' textAlign='left'>Aug 2020 - Oct 2020</Text>
                 </Box>
 
                 <Box mt={6}>
                     <Text lineHeight={2}>
-                        Splask, abbreviated from 'splitting tasks', is a mobile project/work management tool that can be used to keep track of projects and tasks.
-                        It is developed using <b>Android Studio</b> and <b>Springboot</b>. Users can register, login, create projects, tasks, and teams. There are chat rooms that
-                        are powered using WebSockets as well.
+                        <Link href="https://richwoodvc.com/" isExternal><ExternalLinkIcon mx='2px' w={{base:3, md:4}} h={{base:3, md:4}}/>Richwood Ventures</Link> is a joint venture company involved in investment in 
+                        various industries and companies. I was tasked to help develop and maintain their static web pages for multiple different websites. The websites were hosted on Cloudways,
+                        developed using <b>PHP, Javascript and Bootstrap</b>. I helped to implement simple shopping carts and inventory management tools.
                     </Text>
-                    <Box className='flex justify-center' mt={10}>
-                        <Image src={require('./splask-gif.gif')} alt="Spask GIF"/>
-                    </Box>
                     {/* <Text mt={5}>
                         
                     </Text> */}
@@ -84,4 +82,4 @@ const Splask = () => {
 
 }
 
-export default Splask
+export default Richwood

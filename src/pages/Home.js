@@ -8,6 +8,7 @@ import {GrReactjs} from 'react-icons/gr'
 import {skillList as data_skilList} from '../components/Data'
 import { Document, Page, pdfjs } from 'react-pdf'
 import { useState } from 'react'
+import { ExternalLinkIcon } from '@chakra-ui/icons'
 
 const Home = () => {
     pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
@@ -98,7 +99,7 @@ const Home = () => {
                 <Box borderWidth='2px' p={5} mt='5%' borderColor={useColorModeValue('black','gray.300')} className='flex justify-center'>
                     <VStack>
                         <Text w='100%' className='flex justify-center'>
-                            <Link as='a' href='/resume.pdf' download mb={2}>Download my resume here</Link>
+                            <Link as='a' href='/resume.pdf' download mb={2}>Download my resume here <ExternalLinkIcon mx='2px' w={{base:3, md:4}} h={{base:3, md:4}}/></Link>
                         </Text>
 
                         <Collapse in={isOpen} animateOpacity>
