@@ -65,7 +65,7 @@ const Inventory = () => {
 
                 <Box mt={6}>
                     <Text lineHeight={2}>
-                        During the Covid-19 pandemic, a friend of mine started an online business. He business process consisted of buying meat products,
+                        During the Covid-19 pandemic, a friend of mine started an online business. His business process consisted of buying meat products,
                         processing and packaging the meat, and delivering it to customers at our local area. His business soon grew larger, and so
                         did his inventory tracking issues.
                     </Text>
