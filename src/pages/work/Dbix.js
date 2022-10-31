@@ -66,8 +66,8 @@ const Dbix = () => {
 
                 <Box mt={6}>
                     <Text lineHeight={2}>
-                        <Link href="https://www.dbix.com.my/" isExternal><ExternalLinkIcon mx='2px' w={{base:3, md:4}} h={{base:3, md:4}}/>Dbix Systems</Link> 
-                        is a business technology company that customizes software for B2B needs. I was hired as a software developer right after receiving my Diploma in IT, with little to no
+                        <Link href="https://www.dbix.com.my/" isExternal>Dbix Systems<ExternalLinkIcon mx='2px' w={{base:3, md:4}} h={{base:3, md:4}}/></Link> is
+                        a business technology company that customizes software for B2B needs. I was hired as a software developer right after receiving my Diploma in IT, with little to no
                         knowledge of the work industry. My supervisor was thankfully patient and really engaging. During my 8-month work period, I worked on multiple projects.
                     </Text>
                     <Text lineHeight={2} mt={5}>

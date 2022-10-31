@@ -66,7 +66,7 @@ const Richwood = () => {
 
                 <Box mt={6}>
                     <Text lineHeight={2}>
-                        <Link href="https://richwoodvc.com/" isExternal><ExternalLinkIcon mx='2px' w={{base:3, md:4}} h={{base:3, md:4}}/>Richwood Ventures</Link> is a joint venture company involved in investment in 
+                        <Link href="https://richwoodvc.com/" isExternal>Richwood Ventures<ExternalLinkIcon mx='2px' w={{base:3, md:4}} h={{base:3, md:4}}/></Link> is a joint venture company involved in investment in 
                         various industries and companies. I was tasked to help develop and maintain their static web pages for multiple different websites. The websites were hosted on Cloudways,
                         developed using <b>PHP, Javascript and Bootstrap</b>. I helped to implement simple shopping carts and inventory management tools.
                     </Text>
