@@ -66,7 +66,7 @@ const Academic = () => {
                 <AcademicCard
                     schoolName = 'Iowa State University'
                     course = 'BSc Software Engineering'
-                    gpa = '3.97'
+                    gpa = '3.98'
                     startDate = '2021'
                     endDate = '2023'
                 />

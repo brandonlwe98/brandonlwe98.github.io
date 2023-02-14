@@ -15,7 +15,15 @@ import React, { useEffect, useState } from 'react';
 import {Box, Container} from '@chakra-ui/react'
 import { BrowserRouter, Routes, Route, HashRouter } from 'react-router-dom'
 
+import ReactGA from 'react-ga'; //Google Analytics Tracking
+const TRACKING_ID = "UA-250902153-1";
+ReactGA.initialize(TRACKING_ID);
+
 function App() {
+  
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
 
   return (
     <Box>
