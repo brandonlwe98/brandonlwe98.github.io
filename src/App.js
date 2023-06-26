@@ -4,6 +4,10 @@ import Academic from './pages/Academic'
 import Projects from './pages/Projects'
 import Contact from './pages/Contact'
 import Portfolio from './pages/projects/Portfolio'
+import Lobby from './components/demo/scrum-poker-demo/Lobby';
+import Host from './components/demo/scrum-poker-demo/Host';
+import Join from './components/demo/scrum-poker-demo//Join';
+import Room from './components/demo/scrum-poker-demo/Room';
 import Wwf from './pages/projects/Wwf'
 import HowToPlay from './components/demo/wwf-demo/HowToPlay'
 import Splask from './pages/projects/Splask'
@@ -39,6 +43,10 @@ function App() {
                   <Route path='projects/portfolio' element={<Portfolio/>}/>
                   <Route path='projects/wwf' element={<Wwf/>}/>
                   <Route path='projects/wwf/howtoplay' element={<HowToPlay/>}/>
+                  <Route path='demo/scrum-poker/host' element={<Host />} />
+                  <Route path='demo/scrum-poker/join' element={<Join />} />
+                  <Route path='demo/scrum-poker/room' element={<Room />} />
+                  <Route path='demo/scrum-poker' element={<Lobby />} />
                   <Route path='projects/splask' element={<Splask/>}/>
                   <Route path='projects/inventory' element={<Inventory/>}/>
                   <Route path='projects/richwood' element={<Richwood/>}/>
