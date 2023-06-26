@@ -11,7 +11,8 @@ export const sections = [
         {name:'Contact', link: 'contact'}]
 
 //Data for List of Projects
-export const projects = [{date:'2022', name:'Self Portfolio', page:'portfolio'},
+export const projects = [{date:'2023', name:'Scrum Poker', page:'scrum-poker'},
+                        {date:'2022', name:'Self Portfolio', page:'portfolio'},
                         {date:'2022', name:'Wordle With Friends', page:'wwf'},
                         {date:'2022', name:'Splask', page:'splask'},
                         {date:'2020', name:'Inventory Management', page:'inventory'},]

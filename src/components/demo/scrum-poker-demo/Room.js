@@ -30,7 +30,7 @@ const Room = () => {
             story: 0
         })
     }, [])
-    
+
     useEffect(() => {
         console.log("ROOM STATE", state);
 
@@ -53,7 +53,7 @@ const Room = () => {
         function onDisband(value){
             alert(value);
             socket.disconnect();
-            navigate('/demo/scrum-poker/');
+            navigate('/projects/scrum-poker');
         }
       
         socket.on('connect', onConnect);
@@ -79,7 +79,7 @@ const Room = () => {
                 socket.emit("updateStory", {
                     username: playerName,
                     room: playerRoom,
-                    story: document.getElementById('playerInput').value
+                    story: parseInt(document.getElementById('playerInput').value) || 0
                 })
             }
             else if(data.roundStart == 1){ //start round
@@ -146,7 +146,7 @@ const Room = () => {
 
     function leaveRoom(){
         socket.disconnect();
-        navigate('/demo/scrum-poker');
+        navigate('/projects/scrum-poker');
     }
 
     if(!state){ // unable to retrieve room state (refresh page/ etc...)

@@ -46,7 +46,7 @@ function App() {
                   <Route path='demo/scrum-poker/host' element={<Host />} />
                   <Route path='demo/scrum-poker/join' element={<Join />} />
                   <Route path='demo/scrum-poker/room' element={<Room />} />
-                  <Route path='demo/scrum-poker' element={<Lobby />} />
+                  <Route path='projects/scrum-poker' element={<Lobby />} />
                   <Route path='projects/splask' element={<Splask/>}/>
                   <Route path='projects/inventory' element={<Inventory/>}/>
                   <Route path='projects/richwood' element={<Richwood/>}/>

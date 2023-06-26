@@ -2,8 +2,8 @@ import axios from 'axios';
 // generate unique id
 import { v4 as genuuid } from 'uuid';
 
-const backend_url = "http://localhost:5000";
-// const backend_url = "https://tranquil-journey-11987-ca1f5899f31e.herokuapp.com";
+// const backend_url = "http://localhost:5000";
+const backend_url = "https://tranquil-journey-11987-ca1f5899f31e.herokuapp.com";
 
 axios.create({baseUrl:backend_url})
 
