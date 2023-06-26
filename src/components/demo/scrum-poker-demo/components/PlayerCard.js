@@ -1,16 +1,23 @@
 import React from 'react'
-import { Box, Flex, Spacer, Text } from '@chakra-ui/react'
+import { Box, Flex, Spacer, Text, Icon} from '@chakra-ui/react'
+import { AiTwotoneStar } from 'react-icons/ai';
 
-
-const PlayerCard = ({ id, name, input, scrumMaster }) => {
+const PlayerCard = ({ id, name, input, scrumMaster, isCurrent, ready }) => {
     const playerId = id;
 
     return(
-        <Box bg={scrumMaster ? 'tomato' : 'blue.500'} p={4} color='white' mb={5}>
+        <Box bg={scrumMaster ? 'tomato' : (ready ? 'green.500' :'blue.500')} p={4} color='white' mb={5}
+        className="hover:scale-110 duration-200">
             <Flex>
                 <Text>
                     {name}
                 </Text>
+                {
+                    isCurrent ?
+                        <Icon as={AiTwotoneStar} size='sm'/>
+                        :
+                        <></>
+                }
                 <Spacer/>
                 {scrumMaster ? 
                     <Text fontWeight='bold'>

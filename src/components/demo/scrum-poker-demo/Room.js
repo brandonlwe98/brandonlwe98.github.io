@@ -1,4 +1,4 @@
-import { Button, Input, VStack, HStack, Box, Text, Flex, Spacer, IconButton, Tooltip} from '@chakra-ui/react'
+import { Button, Input, VStack, HStack, Box, Text, Flex, Spacer, Icon, Tooltip, InputGroup, InputRightElement} from '@chakra-ui/react'
 import React, {useEffect, useState} from 'react'
 import { useLocation } from 'react-router-dom'
 import { Link, useNavigate} from 'react-router-dom'
@@ -20,6 +20,12 @@ const Room = () => {
     const [playerRoom, setPlayerRoom] = useState(state.session);
 	const [players, setPlayers] = useState([])
     const [isScrumMaster, setIsScrumMaster] = useState(state.scrumMaster)
+    const [highStory, setHighStory] = useState(0);
+    const [lowStory, setLowStory] = useState(0);
+    const [lowestPlayers, setLowestPlayers] = useState([]);
+    const [highestPlayers, setHighestPlayers] = useState([]);
+    const [textCopyRoom, setTextCopyRoom] = useState("Copy Room Code");
+    const [isReady, setIsReady] = useState(false);
 
     useEffect(() => {
         socket.connect();
@@ -48,6 +54,9 @@ const Room = () => {
 
         function onMessageJoin(value) {
             Toastr.success(value)
+            setAverageStory(0);
+            setHighStory(0);
+            setLowStory(0);
         }
 
         function onDisband(value){
@@ -81,6 +90,12 @@ const Room = () => {
                     room: playerRoom,
                     story: parseInt(document.getElementById('playerInput').value) || 0
                 })
+                socket.emit("ready", {
+                    username: playerName,
+                    room: playerRoom,
+                    ready: false
+                })
+                setIsReady(false);
             }
             else if(data.roundStart == 1){ //start round
                 Toastr.success(data.message)
@@ -99,7 +114,8 @@ const Room = () => {
 
     useEffect(() => {
         console.log("PLAYERS IN ROOM ARE NOW ",players)
-        calculateAverage();
+        if(roundStart == 0)
+            calculateAverage();
     }, [players])
 
     useEffect(() => {
@@ -107,6 +123,9 @@ const Room = () => {
     }, [playerInput])
 
     function startRound(){
+        setLowStory(0);
+        setHighStory(0);
+        setAverageStory(0);
         socket.emit("sendMessage", {
             message: `Scrum Master has started the round for [${document.getElementById('playerInput').value}]`,
             roundStart: 1,
@@ -125,6 +144,8 @@ const Room = () => {
     function calculateAverage(){
         var sum = 0;
         var count = 0;
+        var highest = -1;
+        var lowest = 9999;
         if(players.length <= 2){
             setAverageStory(0); //skip calculating average until at least 2 other players arrive
         }
@@ -133,15 +154,64 @@ const Room = () => {
                 if(player.scrumMaster) //skip scrum master voting
                     continue;
                 count++;
-                sum+= parseInt(player.story);
+                var points = parseInt(player.story);
+                console.log("PARSING INT OF " + player.username + " WITH RESULT " + points);
+                sum+= points;
+                if(parseInt(points) >= 0){ //update highest and lowest story points
+                    if(parseInt(points) > highest){
+                        highest = points;
+                    }
+                    if(parseInt(points) < lowest){
+                        lowest = points;
+                    }
+                }
             }
+
+            var highStories = [];
+            var lowStories = [];
+
+            for(const player of players){ //add players to list of highest/lowest story points
+                if(player.scrumMaster) //skip scrum master
+                    continue;
+                var points = parseInt(player.story);
+                if(points){ //update highest and lowest story points
+                    if(points == highest){
+                        highStories.push(player.username);
+                    }
+                    if(points == lowest){
+                        lowStories.push(player.username);
+                    }
+                }
+            }
+            highest = (highest <= 0 ? 0 : highest); //set highest to 0 if default value (-1)
+            lowest = (lowest >= 9999 ? 0 : lowest); //set lowest to 0 if default value (9999)
+            console.log("HIGH STORIES",highStories);
+            console.log("LOW STORIES",lowStories);
+            setHighestPlayers(highStories);
+            setLowestPlayers(lowStories);
+            setHighStory(highest);
+            setLowStory(lowest);
             setAverageStory(parseFloat(sum/count).toFixed(2));
         }
 
     }
 
     function copyRoom(){
+        setTextCopyRoom("Copied!");
         navigator.clipboard.writeText(playerRoom)
+    }
+
+    function submitStory(){
+        if(document.getElementById('playerInput').value.trim() == ""){
+            alert("Please enter a valid number");
+            return;
+        }
+        socket.emit("ready", {
+            username: playerName,
+            room: playerRoom,
+            ready: true
+        })
+        setIsReady(true);
     }
 
     function leaveRoom(){
@@ -157,13 +227,15 @@ const Room = () => {
 	return (
         <Box py={4}>
             <Flex>
-                <Text fontSize="20px" mb={10}>
-                    ROOM SESSION: {state.session}
+                <Text fontSize="20px" mb={10} pr={5}>
+                    ROOM SESSION:
                 </Text>
-                <Tooltip label="Copy room code" fontSize='md'>
-                    <IconButton colorScheme='blue' size='sm' ml={2} icon={<BsClipboard/>} onClick={copyRoom}/>
+                <Tooltip label={textCopyRoom} fontSize='md' mb={10}>
+                    <Button onClick={copyRoom}>
+                        {state.session}
+                        <Icon size='sm' ml={2} as={BsClipboard}/>
+                    </Button>
                 </Tooltip>
-
                 <Spacer/>
                 <Button colorScheme='red' onClick={leaveRoom}>
                     Leave Room
@@ -189,25 +261,53 @@ const Room = () => {
             }
             <HStack>
                 <VStack w='50%' alignItems='left'>
-                    <Box w='75%'>
+                    <Box w='80%'>
                         {
                             players.map((player, index) => (
                                 <PlayerCard
                                     key={index}
                                     id={player.id}
-                                    name={player.username == playerName ? (player.username + "(YOU)") : player.username}
+                                    name={player.username}
                                     input={roundStart == 1 ? '-' : player.story}
                                     scrumMaster={player.scrumMaster}
+                                    isCurrent={player.username == playerName}
+                                    ready={player.ready}
                                 />
+                                // (player.username == playerName ? <Text>HI</Text> : <Text>Ho</Text>)
                             ))
                         }
                     </Box>
                 </VStack>
                 <Box w='50%'>
-                    <Input id='playerInput' placeholder={isScrumMaster ? 'Enter story/issue name' : 'Enter story points'} size='lg' isDisabled={roundStart == 0 && !isScrumMaster? true : false}/>
-                    <Text fontSize='20px' my={5}>
-                        Average Story Points: {averageStory}
-                    </Text>
+                    <HStack>                    
+                        <Input id='playerInput' placeholder={isScrumMaster ? 'Enter story/issue name' : 'Enter story points'} 
+                        size='lg' isDisabled={(roundStart == 0 && !isScrumMaster) || isReady ? true : false}/>
+                        <Button onClick={submitStory} hidden={isScrumMaster} disabled={roundStart == 0 || isReady}>
+                            Submit
+                        </Button>
+                    </HStack>
+                    <HStack mt={5} spacing={5}>
+                        <Text fontSize='18px' w='50%'>
+                            Average Story Points:
+                        </Text>
+                        <Button fontSize='20px'> {averageStory} </Button>
+                    </HStack>
+                    <HStack mt={5} spacing={5}>
+                        <Text fontSize='18px' w='50%'>
+                            Lowest Point:
+                        </Text>
+                        <Tooltip label={lowestPlayers.join(", ")} fontSize='sm'>
+                            <Button fontSize='20px'> {lowStory} </Button>
+                        </Tooltip>
+                    </HStack>
+                    <HStack mt={5} spacing={5}>
+                        <Text fontSize='18px' w='50%'>
+                            Highest Point:
+                        </Text>
+                        <Tooltip label={highestPlayers.join(", ")} fontSize='sm'>
+                            <Button fontSize='20px'> {highStory} </Button>
+                        </Tooltip>
+                    </HStack>
                 </Box>
 
             </HStack>
