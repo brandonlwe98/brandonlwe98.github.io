@@ -99,6 +99,9 @@ const Room = () => {
             }
             else if(data.roundStart == 1){ //start round
                 Toastr.success(data.message)
+                setLowStory(0);
+                setHighStory(0);
+                setAverageStory(0);
             }
             setRoundStart(data.roundStart);
         })
@@ -123,9 +126,6 @@ const Room = () => {
     }, [playerInput])
 
     function startRound(){
-        setLowStory(0);
-        setHighStory(0);
-        setAverageStory(0);
         socket.emit("sendMessage", {
             message: `Scrum Master has started the round for [${document.getElementById('playerInput').value}]`,
             roundStart: 1,
@@ -202,6 +202,7 @@ const Room = () => {
     }
 
     function submitStory(){
+        console.log("USER SUBMITTED WITH VALUE", document.getElementById('playerInput').value)
         if(document.getElementById('playerInput').value.trim() == ""){
             alert("Please enter a valid number");
             return;
