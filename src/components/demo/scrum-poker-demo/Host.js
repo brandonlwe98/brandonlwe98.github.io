@@ -25,14 +25,14 @@ const Host = () => {
                     onClick={async () =>{
                         if(document.getElementById('name').value == ""){
                             alert('Name field is not allowed to be empty!')
-                            console.log("INVALID name");
                         }
                         else{
                             const res = await hostRoom(document.getElementById('name').value)
-                            if(res)
+                            if(res.status == 200){
                                 navigate('/demo/scrum-poker/room', {state: { name: res.name, session: res.session, scrumMaster: true}});
+                            }
                             else
-                                alert("Failed to host room: ");
+                                alert("Failed to host room", res);
                         }
                     }}>
                         Start Session

@@ -36,12 +36,12 @@ const Join = () => {
                                 alert('Session field is not allowed to be empty!')
                             }
                             else{
-                                var join = await joinRoom(document.getElementById('name').value, document.getElementById('session').value);
-                                if(join.status == 200){
-                                    navigate('/demo/scrum-poker/room', { state: {name: join.name, session: join.session, scrumMaster: false}});
+                                var res = await joinRoom(document.getElementById('name').value, document.getElementById('session').value);
+                                if(res.status == 200){
+                                    navigate('/demo/scrum-poker/room', { state: {name: res.name, session: res.session, scrumMaster: false}});
                                 }
                                 else{
-                                    alert('Error joining room: ' + join.message)
+                                    alert('Error joining room: ' + res.message)
                                 }
                             }
                         }}>

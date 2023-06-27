@@ -9,23 +9,24 @@ import * as Toastr from 'toastr'
 import './toastr.css'
 
 const Room = () => {
-    const [isConnected, setIsConnected] = useState(socket.connected);
-    const [fooEvents, setFooEvents] = useState([]);
+    // const [isConnected, setIsConnected] = useState(socket.connected);
+    // const [fooEvents, setFooEvents] = useState([]);
     const {state} = useLocation();
     const navigate = useNavigate();
     const [roundStart, setRoundStart] = useState(0);
     const [averageStory, setAverageStory] = useState(0);
-    const [playerName, setPlayerName] = useState(state.name);
     const [playerInput, setPlayerInput] = useState(0);
-    const [playerRoom, setPlayerRoom] = useState(state.session);
 	const [players, setPlayers] = useState([])
-    const [isScrumMaster, setIsScrumMaster] = useState(state.scrumMaster)
     const [highStory, setHighStory] = useState(0);
     const [lowStory, setLowStory] = useState(0);
     const [lowestPlayers, setLowestPlayers] = useState([]);
     const [highestPlayers, setHighestPlayers] = useState([]);
     const [textCopyRoom, setTextCopyRoom] = useState("Copy Room Code");
     const [isReady, setIsReady] = useState(false);
+    
+    const playerName = state.name;
+    const playerRoom = state.session;
+    const isScrumMaster = state.scrumMaster
 
     useEffect(() => {
         socket.connect();
@@ -39,18 +40,17 @@ const Room = () => {
 
     useEffect(() => {
         console.log("ROOM STATE", state);
-
-        function onConnect() {
-            setIsConnected(true);
-        }
+        // function onConnect() {
+        //     setIsConnected(true);
+        // }
       
-        function onDisconnect() {
-            setIsConnected(false);
-        }
+        // function onDisconnect() {
+        //     setIsConnected(false);
+        // }
       
-        function onFooEvent(value) {
-            setFooEvents(previous => [...previous, value]);
-        }
+        // function onFooEvent(value) {
+        //     setFooEvents(previous => [...previous, value]);
+        // }
 
         function onMessageJoin(value) {
             Toastr.success(value)
@@ -65,9 +65,9 @@ const Room = () => {
             navigate('/projects/scrum-poker');
         }
       
-        socket.on('connect', onConnect);
-        socket.on('disconnect', onDisconnect);
-        socket.on('foo', onFooEvent);
+        // socket.on('connect', onConnect);
+        // socket.on('disconnect', onDisconnect);
+        // socket.on('foo', onFooEvent);
 
         socket.on('messageJoin', onMessageJoin);
 
@@ -108,11 +108,11 @@ const Room = () => {
 
         socket.on('disband', onDisband)
 
-        return () => {
-            socket.off('connect', onConnect);
-            socket.off('disconnect', onDisconnect);
-            socket.off('foo', onFooEvent);
-        };
+        // return () => {
+            // socket.off('connect', onConnect);
+            // socket.off('disconnect', onDisconnect);
+            // socket.off('foo', onFooEvent);
+        // };
     }, [])
 
     useEffect(() => {
@@ -134,6 +134,15 @@ const Room = () => {
     }
 
     function endRound(){
+        // to implement, backend must store round status of each room (in-progress/end)
+        // for(var player of players){ // everyone must be ready to end round
+        //     if(player.scrumMaster)
+        //         continue;
+        //     if(!player.ready){
+        //         alert("Wait for all players to submit input");
+        //         return;
+        //     }
+        // }
         socket.emit("sendMessage", {
             message: `Scrum Master has ended the round!`,
             roundStart: 0,
@@ -155,7 +164,7 @@ const Room = () => {
                     continue;
                 count++;
                 var points = parseInt(player.story);
-                console.log("PARSING INT OF " + player.username + " WITH RESULT " + points);
+                // console.log("PARSING INT OF " + player.username + " WITH RESULT " + points);
                 sum+= points;
                 if(parseInt(points) >= 0){ //update highest and lowest story points
                     if(parseInt(points) > highest){
@@ -185,8 +194,8 @@ const Room = () => {
             }
             highest = (highest <= 0 ? 0 : highest); //set highest to 0 if default value (-1)
             lowest = (lowest >= 9999 ? 0 : lowest); //set lowest to 0 if default value (9999)
-            console.log("HIGH STORIES",highStories);
-            console.log("LOW STORIES",lowStories);
+            // console.log("HIGH STORIES",highStories);
+            // console.log("LOW STORIES",lowStories);
             setHighestPlayers(highStories);
             setLowestPlayers(lowStories);
             setHighStory(highest);
@@ -202,7 +211,7 @@ const Room = () => {
     }
 
     function submitStory(){
-        console.log("USER SUBMITTED WITH VALUE", document.getElementById('playerInput').value)
+        // console.log("USER SUBMITTED WITH VALUE", document.getElementById('playerInput').value)
         if(document.getElementById('playerInput').value.trim() == ""){
             alert("Please enter a valid number");
             return;
