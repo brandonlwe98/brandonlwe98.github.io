@@ -23,7 +23,7 @@ const Room = () => {
     const [highestPlayers, setHighestPlayers] = useState([]);
     const [textCopyRoom, setTextCopyRoom] = useState("Copy Room Code");
     const [isReady, setIsReady] = useState(false);
-    
+    const [animateCard, setAnimateCard] = useState(false, () => false);
     const playerName = state.name;
     const playerRoom = state.session;
     const isScrumMaster = state.scrumMaster
@@ -75,9 +75,21 @@ const Room = () => {
             Toastr.error(data)
         })
 
+        socket.on('leave', (data) => {
+            if(data.name == playerName){
+                leaveRoom();
+                alert(data.message);
+            }
+
+        })
+
         socket.on('roomData', (data) => {
             console.log("CLIENT RECEIVED ROOM DATA ", data)
             setPlayers(data.users)
+            if(data.userGoneReady)
+                animatePlayerCard(data.userGoneReady)
+            else
+                animatePlayerCard(false)
         })
 
         socket.on('message', (data) => {
@@ -93,7 +105,8 @@ const Room = () => {
                 socket.emit("ready", {
                     username: playerName,
                     room: playerRoom,
-                    ready: false
+                    ready: false,
+                    animateUser: false
                 })
                 setIsReady(false);
             }
@@ -210,7 +223,7 @@ const Room = () => {
         navigator.clipboard.writeText(playerRoom)
     }
 
-    function submitStory(){
+    function submitStory(event){
         // console.log("USER SUBMITTED WITH VALUE", document.getElementById('playerInput').value)
         if(document.getElementById('playerInput').value.trim() == ""){
             alert("Please enter a valid number");
@@ -219,9 +232,26 @@ const Room = () => {
         socket.emit("ready", {
             username: playerName,
             room: playerRoom,
-            ready: true
+            ready: true,
+            animateUser: playerName
         })
         setIsReady(true);
+    }
+
+    function animatePlayerCard(playerName){
+        console.log("ANIMATING PLAYER " + playerName)
+        setAnimateCard(playerName)
+    }
+
+    function kickPlayer(kickId, kickName){
+        if(window.confirm("Are you sure you want to kick " + kickName)){
+            console.log("KICKING ID " + kickId);
+            socket.emit("kick", {
+                id: kickId,
+                username: kickName
+            })
+        }
+
     }
 
     function leaveRoom(){
@@ -265,14 +295,36 @@ const Room = () => {
                         </Button>
                     </HStack>
                     :
-                    <Text>
-
-                    </Text>
+                    <div></div>
             }
             <HStack>
                 <VStack w='50%' alignItems='left'>
                     <Box w='80%'>
                         {
+                            isScrumMaster ?
+                            players.map((player, index) => (
+                                <div key={index}>
+                                    <HStack w="100%">
+                                        <Box w="90%">
+                                            <PlayerCard
+                                                key={index}
+                                                id={player.id}
+                                                name={player.username}
+                                                input={roundStart == 1 ? '-' : player.story}
+                                                scrumMaster={player.scrumMaster}
+                                                isCurrent={player.username == playerName}
+                                                ready={player.ready}
+                                                animateCard={animateCard}
+                                                scrumMasterView={isScrumMaster}
+                                            />
+                                        </Box>
+                                        <Button key={index} size='sm' colorScheme='red' hidden={player.scrumMaster} w="10%" onClick={() => kickPlayer(player.id, player.username)}>
+                                            X
+                                        </Button>
+                                    </HStack>
+                                </div>
+                            ))
+                            :
                             players.map((player, index) => (
                                 <PlayerCard
                                     key={index}
@@ -282,8 +334,9 @@ const Room = () => {
                                     scrumMaster={player.scrumMaster}
                                     isCurrent={player.username == playerName}
                                     ready={player.ready}
+                                    animateCard={animateCard}
+                                    scrumMasterView={isScrumMaster}
                                 />
-                                // (player.username == playerName ? <Text>HI</Text> : <Text>Ho</Text>)
                             ))
                         }
                     </Box>

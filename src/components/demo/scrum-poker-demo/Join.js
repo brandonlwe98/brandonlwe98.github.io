@@ -32,6 +32,9 @@ const Join = () => {
                             if(document.getElementById('name').value == ""){
                                 alert('Name field is not allowed to be empty!')
                             }
+                            else if(document.getElementById('name').value.length > 16){
+                                alert('Enter name up to 16 characters only!')  
+                            }
                             else if(document.getElementById('session').value == ""){
                                 alert('Session field is not allowed to be empty!')
                             }
