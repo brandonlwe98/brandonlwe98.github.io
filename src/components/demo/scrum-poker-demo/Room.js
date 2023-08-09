@@ -1,7 +1,7 @@
-import { Button, Input, VStack, HStack, Box, Text, Flex, Spacer, Icon, Tooltip, InputGroup, InputRightElement} from '@chakra-ui/react'
+import { Button, Input, VStack, HStack, Box, Text, Flex, Spacer, Icon, Tooltip} from '@chakra-ui/react'
 import React, {useEffect, useState} from 'react'
 import { useLocation } from 'react-router-dom'
-import { Link, useNavigate} from 'react-router-dom'
+import { useNavigate} from 'react-router-dom'
 import { socket } from './socket';
 import PlayerCard from './components/PlayerCard';
 import { BsClipboard } from 'react-icons/bs';

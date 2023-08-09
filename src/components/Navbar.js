@@ -1,6 +1,6 @@
-import { useColorMode, Icon, DarkMode, LightMode } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react';
-import {Box, Heading, Stack, Spacer, Center, Flex, Button, ButtonGroup, HStack,IconButton,useBreakpointValue,useColorModeValue, Input} from '@chakra-ui/react'
+import { useColorMode, Icon} from '@chakra-ui/react'
+import React from 'react';
+import {Box, Heading, Stack, Flex, useColorModeValue} from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import { MdMenu, MdOutlineDarkMode, MdClose } from 'react-icons/md'
 import { BsSun } from 'react-icons/bs'

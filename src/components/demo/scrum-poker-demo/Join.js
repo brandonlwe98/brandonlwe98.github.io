@@ -1,6 +1,6 @@
 import React from 'react'
 import {Input,Box,VStack,Text,Button} from '@chakra-ui/react'
-import { Link, useNavigate} from 'react-router-dom'
+import { useNavigate} from 'react-router-dom'
 import { joinRoom } from './utils/ApiCalls';
 import { MdKeyboardBackspace } from "react-icons/md"
 
@@ -29,18 +29,18 @@ const Join = () => {
                     <Box>
                         <Button size='lg' colorScheme='blue' mx='auto' my='auto'
                         onClick={async () =>{
-                            if(document.getElementById('name').value == ""){
+                            if(document.getElementById('name').value === ""){
                                 alert('Name field is not allowed to be empty!')
                             }
                             else if(document.getElementById('name').value.length > 16){
                                 alert('Enter name up to 16 characters only!')  
                             }
-                            else if(document.getElementById('session').value == ""){
+                            else if(document.getElementById('session').value === ""){
                                 alert('Session field is not allowed to be empty!')
                             }
                             else{
                                 var res = await joinRoom(document.getElementById('name').value, document.getElementById('session').value);
-                                if(res.status == 200){
+                                if(res.status === 200){
                                     navigate('/demo/scrum-poker/room', { state: {name: res.name, session: res.session, scrumMaster: false}});
                                 }
                                 else{

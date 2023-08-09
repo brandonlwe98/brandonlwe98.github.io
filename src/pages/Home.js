@@ -1,11 +1,8 @@
 import {Text, Heading, Box, VStack, Stack, Image, Icon, Progress, HStack, StackDivider, 
     Center, useColorModeValue, Tooltip, Collapse, useDisclosure, Spacer, Flex, IconButton, Link
 } from '@chakra-ui/react'
-import { FaAngular, FaNodeJs } from 'react-icons/fa'
-import { SiChakraui, SiSpringboot} from 'react-icons/si'
-import {MdArrowDropUp, MdArrowDropDown} from 'react-icons/md'
-import {GrReactjs} from 'react-icons/gr'
-import {skillList as data_skilList} from '../components/Data'
+import { MdArrowDropUp, MdArrowDropDown } from 'react-icons/md'
+import { skillList, environmentList, frameworkList } from '../components/Data'
 import { Document, Page, pdfjs } from 'react-pdf'
 import { useState } from 'react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
@@ -13,7 +10,6 @@ import { ExternalLinkIcon } from '@chakra-ui/icons'
 const Home = () => {
     pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-    const iconSize={base: 45, md:75}
 
     const [numPages, setNumPages] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
@@ -23,19 +19,16 @@ const Home = () => {
         setPageNumber(1);
     }
 
-    function SkillCard({name, icon, percentage}){
+    function SkillCard({name, icon}){
         return(
             <Box w='100%'>
-                <Text w='100%' fontSize='lg'>{name}</Text>
                 <HStack spacing={4}>
-                    <Box p={5} flexShrink={0} w="10%" alignItems='center'>
-                        {icon}
-                    </Box>
-                    <Box p={5} w="90%">
-                        <Progress hasStripe value={percentage} colorScheme='green' size='md' isAnimated zIndex='0'/>
-                    </Box>
+                    <Tooltip label={name}>
+                        <Box p={5} flexShrink={0} w="10%" alignItems='center'>
+                            {icon}
+                        </Box>
+                    </Tooltip>
                 </HStack>
-
             </Box>
         )
     }
@@ -60,13 +53,11 @@ const Home = () => {
                 <Box borderWidth='2px' p={5} mt='5%' borderColor={useColorModeValue('black','gray.300')}>
                     <Collapse in={!isOpen} animateOpacity>
                         <VStack w='100%' divider={<StackDivider borderColor={useColorModeValue('black','gray.300')}/>} alignItems="center">
-                            {data_skilList.map((skill, index) => {
+                            {skillList.map((row, index) => {
                                 return(
-                                    <SkillCard
+                                    <SkillRow 
+                                        row={row}
                                         key={index}
-                                        name={skill.name}
-                                        icon={skill.icon}
-                                        percentage={skill.percentage}
                                     />
                                 )
                             })}
@@ -74,6 +65,31 @@ const Home = () => {
                     </Collapse>
                 </Box>
             </Box>
+        )
+    }
+
+    function SkillRow({row}) {
+        return(
+            <HStack>
+                {row.map((skill, index) => {
+                    return(
+                    <SkillCard
+                        name={skill.name}
+                        icon={skill.icon}
+                        key={index}
+                    />)
+                })}
+            </HStack>
+        )
+    }
+
+    function IconRow({item}) {
+        return(
+            <Tooltip label={item.name}>
+            <Box className="hover:scale-110 hover:rotate-45 duration-200">
+                {item.icon}
+            </Box>
+        </Tooltip>
         )
     }
 
@@ -156,41 +172,40 @@ const Home = () => {
                     <Box borderWidth='2px' p={5} mt='5%' borderColor={useColorModeValue('black','gray.300')}>
                         <Center>
                             <Stack direction='row' spacing={{base:1, md:5}}>
-                                <Tooltip label='AngularJS / Angular6'>
-                                    <Box className="hover:scale-110 hover:rotate-45 duration-200">
-                                        <Icon as={FaAngular} w={iconSize} h={iconSize}/>
-                                    </Box>
-                                </Tooltip>
-                                <Tooltip label='NodeJS / SailsJS'>
-                                    <Box className="hover:scale-110 hover:-rotate-45 duration-200">
-                                        <Icon as={FaNodeJs} w={iconSize} h={iconSize}/>
-                                    </Box>
-                                </Tooltip>
-                                <Tooltip label='Springboot'>
-                                    <Box className="hover:scale-110 hover:rotate-180 duration-200">
-                                        <Icon as={SiSpringboot} w={iconSize} h={iconSize}/>
-                                    </Box>
-                                </Tooltip>
-                                <Tooltip label='ReactJS'>
-                                    <Box className="hover:scale-110 hover:-rotate-90 duration-200">
-                                        <Icon as={GrReactjs} w={iconSize} h={iconSize}/>
-                                    </Box>
-                                </Tooltip>
-                                <Tooltip label='ChakraUI'>
-                                    <Box className="hover:scale-110 hover:rotate-90 duration-200">
-                                        <Icon as={SiChakraui} w={iconSize} h={iconSize}/>
-                                    </Box>  
-                                </Tooltip>
-
+                                {frameworkList.map((environment, index) => {
+                                    return(
+                                        <IconRow
+                                            item={environment}
+                                            key={index}
+                                        />
+                                    )
+                                })}
                             </Stack>
 
                         </Center>
                     </Box>
                 </Box>
 
+                <Box mt={{base:4, md:0}} ml={{md:6}} pt='5%'>
+                    <Heading as="h1">
+                        Environments
+                    </Heading>
+                    <Box borderWidth='2px' p={5} mt='5%' borderColor={useColorModeValue('black','gray.300')}>
+                        <Center>
+                            <Stack direction='row' spacing={{base:1, md:5}}>
+                                {environmentList.map((environment, index) => {
+                                    return(
+                                        <IconRow
+                                            item={environment}
+                                            key={index}
+                                        />
+                                    )
+                                })}
+                            </Stack>
+                        </Center>
+                    </Box>
+                </Box>
             </VStack>
-
-
         </Box>
     )
 }
