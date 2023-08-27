@@ -167,7 +167,7 @@ const Home = () => {
 
                 <Box mt={{base:4, md:0}} ml={{md:6}} pt='5%'>
                     <Heading as="h1">
-                        Frameworks
+                        Frameworks & Libraries
                     </Heading>
                     <Box borderWidth='2px' p={5} mt='5%' borderColor={useColorModeValue('black','gray.300')}>
                         <Center>
