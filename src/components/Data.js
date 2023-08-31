@@ -1,7 +1,6 @@
 import { Icon } from '@chakra-ui/react'
-import { FaHtml5, FaJava, FaUbuntu, FaAngular, FaNodeJs, FaGitlab, FaAws } from 'react-icons/fa'
+import { FaHtml5, FaJava, FaUbuntu, FaAngular, FaNodeJs, FaGitlab, FaAws, FaCuttlefish } from 'react-icons/fa'
 import { SiJavascript, SiCss3, SiMysql, SiPhp, SiPython, SiPostman, SiSpringboot, SiChakraui, SiTerraform } from 'react-icons/si'
-import { TbLetterC } from 'react-icons/tb'
 import { DiAndroid, DiLinux } from 'react-icons/di'
 import { BsWindows, BsGithub } from 'react-icons/bs'
 import { GrReactjs } from 'react-icons/gr'
@@ -31,7 +30,7 @@ export const skillList = [
         [
                 {name:'Javascript', icon:<Icon as={SiJavascript} w={iconSize} h={iconSize}/>},
                 {name:'Java', icon:<Icon as={FaJava} w={iconSize} h={iconSize}/>},
-                {name:'C/C++', icon:<Icon as={TbLetterC} w={iconSize} h={iconSize}/>},
+                {name:'C/C++', icon:<Icon as={FaCuttlefish} w={iconSize} h={iconSize}/>},
                 {name:'Python', icon:<Icon as={SiPython} w={iconSize} h={iconSize}/>},
         ],
         [
