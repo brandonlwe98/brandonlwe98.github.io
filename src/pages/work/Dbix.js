@@ -27,7 +27,7 @@ const Dbix = () => {
                                 className='hover:opacity-75 hover:scale-110 cursor-pointer'
                                 onClick={
                                     (e) => {
-                                        navigatePost('/projects/' + data_works[prevIndex].page, e)
+                                        navigatePost('/work/' + data_works[prevIndex].page, e)
                                     }
                                 }/>
                         </Box>
@@ -45,7 +45,7 @@ const Dbix = () => {
                                         className='hover:opacity-75 hover:scale-110 cursor-pointer'
                                         onClick={
                                             (e) => {
-                                                navigatePost('/projects/' + data_works[nextIndex].page, e)
+                                                navigatePost('/work/' + data_works[nextIndex].page, e)
                                             }
                                         }/>
                                 </Box>

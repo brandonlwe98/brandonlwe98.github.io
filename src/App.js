@@ -15,6 +15,7 @@ import ScrumPoker from './pages/projects/ScrumPoker'
 import Inventory from './pages/projects/Inventory'
 import Richwood from './pages/work/Richwood'
 import Dbix from './pages/work/Dbix'
+import Kingland from './pages/work/Kingland'
 
 import React, { useEffect } from 'react';
 import {Box, Container} from '@chakra-ui/react'
@@ -54,8 +55,9 @@ function App() {
                   <Route path='demo/scrum-poker/room' element={<Room/>} />
                   <Route path='projects/scrum-poker' element={<Lobby/>} />
                   
-                  <Route path='projects/richwood' element={<Richwood/>}/>
-                  <Route path='projects/dbix' element={<Dbix/>}/>
+                  <Route path='work/kingland' element={<Kingland/>}/>
+                  <Route path='work/richwood' element={<Richwood/>}/>
+                  <Route path='work/dbix' element={<Dbix/>}/>
                 </Routes>
             </Container>
         </HashRouter>

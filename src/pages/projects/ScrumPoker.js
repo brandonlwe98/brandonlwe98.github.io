@@ -1,4 +1,4 @@
-import {Box, useColorModeValue, Text, Spacer, Stack, Tooltip, Icon, Button, Center } from '@chakra-ui/react'
+import {Box, useColorModeValue, Text, Spacer, Stack, Tooltip, Icon, Button, Center, Image } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import {HiArrowCircleLeft, HiArrowCircleRight} from 'react-icons/hi'
 import {useNavigate} from 'react-router-dom'
@@ -91,7 +91,11 @@ const ScrumPoker = () => {
                         the <span className='animate-pulse'>socket-io</span> npm package.
                     </Text>
 
-                    <Box mt={10} display={{ base: "block", md: "none" }}>
+                    <Box className='flex justify-center' mt={10}>
+                        <Image src={require('./scrum-poker-demo.gif')} alt="Scrum Poker GIF"/>
+                    </Box>
+
+                    {/* <Box mt={10} display={{ base: "block", md: "none" }}>
                         <Text className='animate-pulse'>Sorry, the demo is not supported on mobile</Text>
                     </Box>
 
@@ -102,7 +106,7 @@ const ScrumPoker = () => {
                             </Button> 
                         </Link>
 
-                    </Center>
+                    </Center> */}
 
                 </Box>
             </Box>

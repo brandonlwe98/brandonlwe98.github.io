@@ -65,7 +65,7 @@ const Projects = () => {
                             {data_works.map((work, index)=> {
                                 return(
                                     <Box mb={4} key={index}>
-                                        <Link as={Navigate} to={"/projects/"+work.page}>{work.name} 
+                                        <Link as={Navigate} to={"/work/"+work.page}>{work.name} 
                                             <ExternalLinkIcon mx={2} w={{base:3, md:4}} h={{base:3, md:4}}/>
                                         </Link>    
                                     </Box>

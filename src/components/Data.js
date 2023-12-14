@@ -22,7 +22,8 @@ export const projects = [{date:'2023', name:'Scrum Poker', page:'scrum-poker-dem
                         {date:'2020', name:'Inventory Management', page:'inventory'},]
 
 //Data for List of Work Experiences
-export const works = [{date:'2020', name:'Richwood Ventures', page:'richwood'},
+export const works = [  {date:'2023', name:'Kingland Systems', page:'kingland'},
+                        {date:'2020', name:'Richwood Ventures', page:'richwood'},
                         {date:'2018-2019', name:'Dbix Systems', page:'dbix'},]
 
 //Data for List of Skills
