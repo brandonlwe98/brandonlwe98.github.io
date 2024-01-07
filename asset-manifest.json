@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/static/css/main.ea5d0030.css",
-    "main.js": "/static/js/main.5ae65408.js",
+    "main.js": "/static/js/main.71d737b1.js",
     "static/js/787.128fc6e9.chunk.js": "/static/js/787.128fc6e9.chunk.js",
     "static/media/splask-gif.gif": "/static/media/splask-gif.349a474cb4a7fde59907.gif",
     "static/media/scrum-poker-demo.gif": "/static/media/scrum-poker-demo.0799a1e5b7932debe587.gif",
     "static/media/inventory-gif.gif": "/static/media/inventory-gif.c2217d55f7911ef6b3eb.gif",
     "index.html": "/index.html",
     "main.ea5d0030.css.map": "/static/css/main.ea5d0030.css.map",
-    "main.5ae65408.js.map": "/static/js/main.5ae65408.js.map",
+    "main.71d737b1.js.map": "/static/js/main.71d737b1.js.map",
     "787.128fc6e9.chunk.js.map": "/static/js/787.128fc6e9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ea5d0030.css",
-    "static/js/main.5ae65408.js"
+    "static/js/main.71d737b1.js"
   ]
 }
