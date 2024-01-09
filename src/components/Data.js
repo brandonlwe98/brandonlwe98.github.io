@@ -6,6 +6,7 @@ import { BsWindows, BsGithub } from 'react-icons/bs'
 import { GrReactjs } from 'react-icons/gr'
 import { TbBrandNextjs } from "react-icons/tb";
 
+// set the size of the icons on home page (base = small devices, md = medium and larger)
 const iconSize={base: 55, md:75}
 
 //Data for Navbar Options
@@ -51,7 +52,6 @@ export const skillList = [
         [
                 {name:'Terraform', icon:<Icon as={SiTerraform} w={iconSize} h={iconSize}/>},
                 {name:'AWS', icon:<Icon as={FaAws} w={iconSize} h={iconSize}/>},
-
         ]
 ]
 

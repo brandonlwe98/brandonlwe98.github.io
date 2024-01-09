@@ -24,7 +24,7 @@ const Home = () => {
             <Box w='100%'>
                 <HStack spacing={4}>
                     <Tooltip label={name}>
-                        <Box p={5} flexShrink={0} w="10%" alignItems='center'>
+                        <Box p={5} flexShrink={0} alignItems='center'>
                             {icon}
                         </Box>
                     </Tooltip>
@@ -52,7 +52,7 @@ const Home = () => {
 
                 <Box borderWidth='2px' p={5} mt='5%' borderColor={useColorModeValue('black','gray.300')}>
                     <Collapse in={!isOpen} animateOpacity>
-                        <VStack w='100%' divider={<StackDivider borderColor={useColorModeValue('black','gray.300')}/>} alignItems="center">
+                        <VStack className='overflow-scroll' w='100%' divider={<StackDivider borderColor={useColorModeValue('black','gray.300')}/>} alignItems="center">
                             {skillList.map((row, index) => {
                                 return(
                                     <SkillRow 
@@ -169,13 +169,13 @@ const Home = () => {
                     <Heading as="h1">
                         Frameworks & Libraries
                     </Heading>
-                    <Box borderWidth='2px' p={5} mt='5%' borderColor={useColorModeValue('black','gray.300')}>
+                    <Box className='overflow-auto' borderWidth='2px' p={5} mt='5%' borderColor={useColorModeValue('black','gray.300')}>
                         <Center>
                             <Stack direction='row' spacing={{base:1, md:5}}>
-                                {frameworkList.map((environment, index) => {
+                                {frameworkList.map((framework, index) => {
                                     return(
                                         <IconRow
-                                            item={environment}
+                                            item={framework}
                                             key={index}
                                         />
                                     )
