@@ -1,9 +1,10 @@
 import { Icon } from '@chakra-ui/react'
 import { FaHtml5, FaJava, FaUbuntu, FaAngular, FaNodeJs, FaGitlab, FaAws, FaCuttlefish } from 'react-icons/fa'
-import { SiJavascript, SiCss3, SiMysql, SiPhp, SiPython, SiPostman, SiSpringboot, SiChakraui, SiTerraform } from 'react-icons/si'
+import { SiPostgresql , SiJavascript, SiCss3, SiMysql, SiPhp, SiPython, SiPostman, SiSpringboot, SiChakraui, SiTerraform } from 'react-icons/si'
 import { DiAndroid, DiLinux } from 'react-icons/di'
 import { BsWindows, BsGithub } from 'react-icons/bs'
 import { GrReactjs } from 'react-icons/gr'
+import { TbBrandNextjs } from "react-icons/tb";
 
 const iconSize={base: 55, md:75}
 
@@ -33,12 +34,13 @@ export const skillList = [
                 {name:'Java', icon:<Icon as={FaJava} w={iconSize} h={iconSize}/>},
                 {name:'C/C++', icon:<Icon as={FaCuttlefish} w={iconSize} h={iconSize}/>},
                 {name:'Python', icon:<Icon as={SiPython} w={iconSize} h={iconSize}/>},
+                {name:'PHP', icon:<Icon as={SiPhp} w={iconSize} h={iconSize}/>},    
         ],
         [
                 {name:'GitHub', icon:<Icon as={BsGithub} w={iconSize} h={iconSize}/>},
                 {name:'GitLab', icon:<Icon as={FaGitlab} w={iconSize} h={iconSize}/>},   
                 {name:'MySQL', icon:<Icon as={SiMysql} w={iconSize} h={iconSize}/>},
-                {name:'PHP', icon:<Icon as={SiPhp} w={iconSize} h={iconSize}/>},    
+                {name:'PostgreSQL', icon:<Icon as={SiPostgresql} w={iconSize} h={iconSize}/>},
         ],
         [
                 {name:'Android Studio', icon:<Icon as={DiAndroid} w={iconSize} h={iconSize}/>},
@@ -59,6 +61,7 @@ export const frameworkList = [
         {name:'NodeJS', icon:<Icon as={FaNodeJs} w={iconSize} h={iconSize}/>},
         {name:'Springboot', icon:<Icon as={SiSpringboot} w={iconSize} h={iconSize}/>},  
         {name:'ReactJS', icon:<Icon as={GrReactjs} w={iconSize} h={iconSize}/>},  
+        {name:'NextJS', icon:<Icon as={TbBrandNextjs} w={iconSize} h={iconSize}/>},
         {name:'ChakraUI', icon:<Icon as={SiChakraui} w={iconSize} h={iconSize}/>},  
 
 ]
