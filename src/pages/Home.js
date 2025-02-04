@@ -1,4 +1,4 @@
-import {Text, Heading, Box, VStack, Stack, Image, Icon, Progress, HStack, StackDivider, 
+import {Text, Heading, Box, VStack, Stack, Image, Icon, StackDivider, HStack, 
     Center, useColorModeValue, Tooltip, Collapse, useDisclosure, Spacer, Flex, IconButton, Link
 } from '@chakra-ui/react'
 import { MdArrowDropUp, MdArrowDropDown } from 'react-icons/md'
@@ -11,11 +11,9 @@ const Home = () => {
     pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 
-    const [numPages, setNumPages] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
 
     function onDocumentLoadSuccess({ numPages }) {
-        setNumPages(numPages);
         setPageNumber(1);
     }
 
@@ -33,7 +31,7 @@ const Home = () => {
         )
     }
 
-    function SkillBox({}){
+    function SkillBox(){
         const { isOpen, onToggle } = useDisclosure()
 
         return(
@@ -93,7 +91,7 @@ const Home = () => {
         )
     }
 
-    function ResumeCard({}){
+    function ResumeCard(){
         const { isOpen, onToggle } = useDisclosure()
         return(
             <Box>
@@ -145,7 +143,7 @@ const Home = () => {
                             About Me
                         </Heading>
                         <Text fontSize='lg' mt={4}>
-                            My name is Brandon and I'm a <b>Software Engineer</b> who's passionate for programming. I enjoy web development as well as general programming.
+                            My name is Brandon and I'm a <b>Software Engineer</b> who's passionate for programming. I enjoy full-stack web development as well as general programming.
                         </Text>
                     </Box>
                 </Box>

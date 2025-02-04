@@ -36,7 +36,7 @@ const Room = () => {
             scrumMaster: state.scrumMaster,
             story: 0
         })
-    }, [])
+    }, [state])
 
     useEffect(() => {
         console.log("ROOM STATE", state);
@@ -76,7 +76,7 @@ const Room = () => {
         })
 
         socket.on('leave', (data) => {
-            if(data.name == playerName){
+            if(data.name === playerName){
                 leaveRoom();
                 alert(data.message);
             }
@@ -93,7 +93,7 @@ const Room = () => {
         })
 
         socket.on('message', (data) => {
-            if(data.roundStart == 0){ //end round
+            if(data.roundStart === 0){ //end round
                 Toastr.error(data.message);
                 setPlayerInput(document.getElementById('playerInput').value);
                 console.log("EMITTING UPDATE STORY " + playerName + " IN ROOM " + playerRoom + " WITH STORY " + playerInput)
@@ -110,7 +110,7 @@ const Room = () => {
                 })
                 setIsReady(false);
             }
-            else if(data.roundStart == 1){ //start round
+            else if(data.roundStart === 1){ //start round
                 Toastr.success(data.message)
                 setLowStory(0);
                 setHighStory(0);
@@ -126,11 +126,11 @@ const Room = () => {
             // socket.off('disconnect', onDisconnect);
             // socket.off('foo', onFooEvent);
         // };
-    }, [])
+    }, []);
 
     useEffect(() => {
         console.log("PLAYERS IN ROOM ARE NOW ",players)
-        if(roundStart == 0)
+        if(roundStart === 0)
             calculateAverage();
     }, [players])
 
@@ -176,7 +176,7 @@ const Room = () => {
                 if(player.scrumMaster) //skip scrum master voting
                     continue;
                 count++;
-                var points = parseInt(player.story);
+                let points = parseInt(player.story);
                 // console.log("PARSING INT OF " + player.username + " WITH RESULT " + points);
                 sum+= points;
                 if(parseInt(points) >= 0){ //update highest and lowest story points
@@ -195,12 +195,12 @@ const Room = () => {
             for(const player of players){ //add players to list of highest/lowest story points
                 if(player.scrumMaster) //skip scrum master
                     continue;
-                var points = parseInt(player.story);
+                    let points = parseInt(player.story);
                 if(points){ //update highest and lowest story points
-                    if(points == highest){
+                    if(points === highest){
                         highStories.push(player.username);
                     }
-                    if(points == lowest){
+                    if(points === lowest){
                         lowStories.push(player.username);
                     }
                 }
@@ -225,7 +225,7 @@ const Room = () => {
 
     function submitStory(event){
         // console.log("USER SUBMITTED WITH VALUE", document.getElementById('playerInput').value)
-        if(document.getElementById('playerInput').value.trim() == ""){
+        if(document.getElementById('playerInput').value.trim() === ""){
             alert("Please enter a valid number");
             return;
         }
@@ -285,11 +285,11 @@ const Room = () => {
             {
                 state.scrumMaster ?
                     <HStack mb={5} spacing='20px'>
-                        <Button colorScheme="blue" isDisabled={roundStart == 0 ? false : true}
+                        <Button colorScheme="blue" isDisabled={roundStart === 0 ? false : true}
                         onClick={startRound}>
                             Start round
                         </Button>
-                        <Button colorScheme="blue" isDisabled={roundStart == 1 ? false : true}
+                        <Button colorScheme="blue" isDisabled={roundStart === 1 ? false : true}
                         onClick={endRound}>
                             End round
                         </Button>
@@ -310,9 +310,9 @@ const Room = () => {
                                                 key={index}
                                                 id={player.id}
                                                 name={player.username}
-                                                input={roundStart == 1 ? '-' : player.story}
+                                                input={roundStart === 1 ? '-' : player.story}
                                                 scrumMaster={player.scrumMaster}
-                                                isCurrent={player.username == playerName}
+                                                isCurrent={player.username === playerName}
                                                 ready={player.ready}
                                                 animateCard={animateCard}
                                                 scrumMasterView={isScrumMaster}
@@ -330,9 +330,9 @@ const Room = () => {
                                     key={index}
                                     id={player.id}
                                     name={player.username}
-                                    input={roundStart == 1 ? '-' : player.story}
+                                    input={roundStart === 1 ? '-' : player.story}
                                     scrumMaster={player.scrumMaster}
-                                    isCurrent={player.username == playerName}
+                                    isCurrent={player.username === playerName}
                                     ready={player.ready}
                                     animateCard={animateCard}
                                     scrumMasterView={isScrumMaster}
@@ -344,8 +344,8 @@ const Room = () => {
                 <Box w='50%'>
                     <HStack>                    
                         <Input id='playerInput' placeholder={isScrumMaster ? 'Enter story/issue name' : 'Enter story points'} 
-                        size='lg' isDisabled={(roundStart == 0 && !isScrumMaster) || isReady ? true : false}/>
-                        <Button onClick={submitStory} hidden={isScrumMaster} disabled={roundStart == 0 || isReady}>
+                        size='lg' isDisabled={(roundStart === 0 && !isScrumMaster) || isReady ? true : false}/>
+                        <Button onClick={submitStory} hidden={isScrumMaster} disabled={roundStart === 0 || isReady}>
                             Submit
                         </Button>
                     </HStack>

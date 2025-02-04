@@ -1,6 +1,5 @@
-import { Box, Button, Center, HStack } from '@chakra-ui/react'
+import { Box, HStack } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
-import Keyboard from './Keyboard'
 import Tile from './Tile'
 import anime from 'animejs'
 import Anime from 'react-animejs-wrapper'

@@ -1,4 +1,4 @@
-import {Text, Center, Icon, IconButton, Box, VStack, Stack, Tooltip, useColorModeValue, HStack} from '@chakra-ui/react'
+import {Text, Icon, IconButton, Box, VStack, Tooltip, useColorModeValue, HStack} from '@chakra-ui/react'
 import {BsLinkedin, BsGithub} from 'react-icons/bs'
 import {MdMail} from 'react-icons/md'
 

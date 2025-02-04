@@ -54,10 +54,10 @@ const Navbar = () => {
                 {/* <DarkMode>  */}
                     <Box p={5}  
                     color={colorMode === 'light' ? 
-                        (currentLocation == "/"+pageLink ? "white" : "black") : 
+                        (currentLocation === "/"+pageLink ? "white" : "black") : 
                         (currentLocation === "/"+pageLink ? "teal.500" : "white")}
                     backgroundColor={colorMode === 'light' ? 
-                        (currentLocation == "/"+pageLink ? "teal.500" : navbarColor) : 
+                        (currentLocation === "/"+pageLink ? "teal.500" : navbarColor) : 
                         (currentLocation === "/"+pageLink ? "white" : navbarColor)}
                     className={hoverNavbar}
                     borderRadius={10}

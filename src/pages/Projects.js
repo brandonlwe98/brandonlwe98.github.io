@@ -1,7 +1,6 @@
-import {Grid, Button, Box, VStack, Text, Stack, Link, StackDivider, useColorModeValue} from '@chakra-ui/react'
-import {Link as Navigate, useNavigate } from 'react-router-dom'
-import {projects as data_projects, works as data_works} from '../components/Data'
-import {BiLinkExternal} from 'react-icons/bi'
+import { Box, VStack, Text, Stack, Link } from '@chakra-ui/react'
+import { Link as Navigate, useNavigate } from 'react-router-dom'
+import { projects as data_projects, works as data_works } from '../components/Data'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
 
 const Projects = () => {

@@ -23,7 +23,7 @@ const Host = () => {
                 <Box>
                     <Button size='lg' colorScheme='blue' mx='auto' my='auto'
                     onClick={async () =>{
-                        if(document.getElementById('name').value == ""){
+                        if(document.getElementById('name').value === ""){
                             alert('Name field is not allowed to be empty!')
                         }
                         else if(document.getElementById('name').value.length > 16){
@@ -31,7 +31,7 @@ const Host = () => {
                         }
                         else{
                             const res = await hostRoom(document.getElementById('name').value)
-                            if(res.status == 200){
+                            if(res.status === 200){
                                 navigate('/demo/scrum-poker/room', {state: { name: res.name, session: res.session, scrumMaster: true}});
                             }
                             else

@@ -1,6 +1,6 @@
-import {Box, useColorModeValue, Text, Spacer, Stack, Tooltip, Icon, Link} from '@chakra-ui/react'
+import {Box, useColorModeValue, Text, Spacer, Stack, Tooltip, Icon} from '@chakra-ui/react'
 import {HiArrowCircleLeft, HiArrowCircleRight} from 'react-icons/hi'
-import {Link as Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { FaQuestionCircle } from 'react-icons/fa'
 import {MdCancel} from 'react-icons/md'
 import {projects as data_projects} from '../../components/Data'

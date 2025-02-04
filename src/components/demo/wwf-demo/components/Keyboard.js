@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import { Button, Stack, HStack, IconButton, Icon } from '@chakra-ui/react'
+import React from 'react'
+import { Button, HStack, IconButton } from '@chakra-ui/react'
 import { RiDeleteBack2Line } from 'react-icons/ri'
-import { Outlet, Link } from 'react-router-dom'
-import { click } from '@testing-library/user-event/dist/click'
 
 const Keyboard = ({ addLetter, deleteLastLetter, submitGuess }) => {
 	return (

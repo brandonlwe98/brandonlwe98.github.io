@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Keyboard from './components/Keyboard'
-import { Button, Box, toast } from '@chakra-ui/react'
-import { Link } from 'react-router-dom'
+import { Button, Box } from '@chakra-ui/react'
 import { MdOutlineRestartAlt } from 'react-icons/md'
 import * as Toastr from 'toastr'
 import './toastr.css'
@@ -85,7 +84,7 @@ const SinglePlayer = () => {
 
 	useEffect(() => {
 		// storing input name
-		if (gameOver == true) {
+		if (gameOver === true) {
 			// const username = sessionStorage.getItem('username')
 			sessionStorage.setItem('gameOver', gameOver)
 			sessionStorage.clear()

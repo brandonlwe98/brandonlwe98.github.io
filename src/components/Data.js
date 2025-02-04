@@ -57,7 +57,7 @@ export const skillList = [
 
 //Data for List of Frameworks
 export const frameworkList = [
-        {name:'Angular6', icon:<Icon as={FaAngular} w={iconSize} h={iconSize}/>},
+        {name:'Angular', icon:<Icon as={FaAngular} w={iconSize} h={iconSize}/>},
         {name:'NodeJS', icon:<Icon as={FaNodeJs} w={iconSize} h={iconSize}/>},
         {name:'Springboot', icon:<Icon as={SiSpringboot} w={iconSize} h={iconSize}/>},  
         {name:'ReactJS', icon:<Icon as={GrReactjs} w={iconSize} h={iconSize}/>},  

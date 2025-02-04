@@ -1,15 +1,9 @@
-import { Box, Divider, Heading, Text, Button, Flex, Spacer, useColorModeValue } from '@chakra-ui/react'
+import { Box, Divider, Heading, Text, Flex, Spacer, useColorModeValue } from '@chakra-ui/react'
 import React from 'react'
 import MiniTile from './components/MiniTile'
-import { Link, useNavigate } from 'react-router-dom'
 
 const HowToPlay = () => {
     
-	const navigate = useNavigate()
-
-    const back = () => {
-        navigate(-1);
-    }
 	return (
 		<Box className='flex flex-col justify-center mx-auto border-1 p-5'>
             <Flex>

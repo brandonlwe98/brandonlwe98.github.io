@@ -66,7 +66,7 @@ const Kingland = () => {
 
                 <Box mt={6}>
                     <Text lineHeight={2}>
-                        <Link href="https://www.kingland.com/" isExternal>Kingland Systems<ExternalLinkIcon mx='2px' w={{base:3, md:4}} h={{base:3, md:4}}/></Link> is
+                        <Link color="blue.400" href="https://www.kingland.com/" isExternal>Kingland Systems<ExternalLinkIcon mx='2px' w={{base:3, md:4}} h={{base:3, md:4}}/></Link> is
                         a business technology company that develops data management software. They specialize in solutions for data management, risk management, independence,
                         regulatory compliance, enterprise workflow, and much more! I joined the internship program throughout the Summer 2023 semester (May 2023 - Aug 2023), 
                         and eventually extending my internship throughout the Fall 2023 semester (Aug 2023 - Dec 2023).
