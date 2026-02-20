@@ -1,8 +1,8 @@
-import {Text, Heading, Box, VStack, Stack, Image, Icon, StackDivider, HStack, 
-    Center, useColorModeValue, Tooltip, Collapse, useDisclosure, Spacer, Flex, IconButton, Link
+import {Text, Heading, Box, VStack, Image, Icon, 
+    useColorModeValue, Tooltip, Collapse, useDisclosure, Spacer, Flex, IconButton, Link, Wrap, WrapItem
 } from '@chakra-ui/react'
 import { MdArrowDropUp, MdArrowDropDown } from 'react-icons/md'
-import { skillList, environmentList, frameworkList } from '../components/Data'
+import { languageList, toolsCategories } from '../components/Data'
 import { Document, Page, pdfjs } from 'react-pdf'
 import { useState } from 'react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
@@ -17,17 +17,13 @@ const Home = () => {
         setPageNumber(1);
     }
 
-    function SkillCard({name, icon}){
+    function IconRow({item}) {
         return(
-            <Box w='100%'>
-                <HStack spacing={4}>
-                    <Tooltip label={name}>
-                        <Box p={5} flexShrink={0} alignItems='center'>
-                            {icon}
-                        </Box>
-                    </Tooltip>
-                </HStack>
+            <Tooltip label={item.name}>
+            <Box className="hover:scale-110 hover:rotate-45 duration-200">
+                {item.icon}
             </Box>
+        </Tooltip>
         )
     }
 
@@ -38,7 +34,7 @@ const Home = () => {
             <Box mt={8}>
                 <Flex>
                     <Heading as="h1">
-                        Skills
+                        Languages
                     </Heading>
                     <Spacer/>
                     <IconButton icon={<Icon as={!isOpen ? MdArrowDropUp : MdArrowDropDown} w={25} h={25} color='white'/>} 
@@ -48,46 +44,69 @@ const Home = () => {
                         size='md' onClick={onToggle}/>
                 </Flex>
 
-                <Box borderWidth='2px' p={5} mt='5%' borderColor={useColorModeValue('black','gray.300')}>
+                <Box borderWidth='2px' p={5} mt='5%' borderColor={useColorModeValue('black','gray.300')} overflowX='hidden'>
                     <Collapse in={!isOpen} animateOpacity>
-                        <VStack className='overflow-scroll' w='100%' divider={<StackDivider borderColor={useColorModeValue('black','gray.300')}/>} alignItems="center">
-                            {skillList.map((row, index) => {
+                        <Wrap w='100%' spacing={{base: 4, md: 6}} justify="center">
+                            {languageList.map((language, index) => {
                                 return(
-                                    <SkillRow 
-                                        row={row}
-                                        key={index}
-                                    />
+                                    <WrapItem key={index}>
+                                        <IconRow
+                                            item={language}
+                                        />
+                                    </WrapItem>
                                 )
                             })}
-                        </VStack>
+                        </Wrap>
                     </Collapse>
                 </Box>
             </Box>
         )
     }
 
-    function SkillRow({row}) {
-        return(
-            <HStack>
-                {row.map((skill, index) => {
-                    return(
-                    <SkillCard
-                        name={skill.name}
-                        icon={skill.icon}
-                        key={index}
-                    />)
-                })}
-            </HStack>
-        )
-    }
+    function ToolsBox(){
+        const { isOpen, onToggle } = useDisclosure()
 
-    function IconRow({item}) {
         return(
-            <Tooltip label={item.name}>
-            <Box className="hover:scale-110 hover:rotate-45 duration-200">
-                {item.icon}
+            <Box mt={8}>
+                <Flex>
+                    <Heading as="h1">
+                        Tools
+                    </Heading>
+                    <Spacer/>
+                    <IconButton icon={<Icon as={!isOpen ? MdArrowDropUp : MdArrowDropDown} w={25} h={25} color='white'/>} 
+                        bgColor='teal.500'
+                        _hover={{ bg: "gray.500" }}
+                        zIndex='0'
+                        size='md' onClick={onToggle}/>
+                </Flex>
+
+                <Box borderWidth='2px' p={5} mt='5%' borderColor={useColorModeValue('black','gray.300')} overflowX='hidden'>
+                    <Collapse in={!isOpen} animateOpacity>
+                        <VStack spacing={6} alignItems='stretch'>
+                            {toolsCategories.map((category, catIndex) => {
+                                return(
+                                    <Box key={catIndex}>
+                                        <Heading as="h3" size="md" mb={3}>
+                                            {category.category}
+                                        </Heading>
+                                        <Wrap spacing={{base: 4, md: 6}} justify="center">
+                                            {category.items.map((tool, toolIndex) => {
+                                                return(
+                                                    <WrapItem key={toolIndex}>
+                                                        <IconRow
+                                                            item={tool}
+                                                        />
+                                                    </WrapItem>
+                                                )
+                                            })}
+                                        </Wrap>
+                                    </Box>
+                                )
+                            })}
+                        </VStack>
+                    </Collapse>
+                </Box>
             </Box>
-        </Tooltip>
         )
     }
 
@@ -161,47 +180,7 @@ const Home = () => {
                 <Box mt={{base:4, md:0}} pt={5}>
                     <ResumeCard/>
                     <SkillBox/>
-                </Box>
-
-                <Box mt={{base:4, md:0}} ml={{md:6}} pt='5%'>
-                    <Heading as="h1">
-                        Frameworks & Libraries
-                    </Heading>
-                    <Box className='overflow-auto' borderWidth='2px' p={5} mt='5%' borderColor={useColorModeValue('black','gray.300')}>
-                        <Center>
-                            <Stack direction='row' spacing={{base:1, md:5}}>
-                                {frameworkList.map((framework, index) => {
-                                    return(
-                                        <IconRow
-                                            item={framework}
-                                            key={index}
-                                        />
-                                    )
-                                })}
-                            </Stack>
-
-                        </Center>
-                    </Box>
-                </Box>
-
-                <Box mt={{base:4, md:0}} ml={{md:6}} pt='5%'>
-                    <Heading as="h1">
-                        Environments
-                    </Heading>
-                    <Box borderWidth='2px' p={5} mt='5%' borderColor={useColorModeValue('black','gray.300')}>
-                        <Center>
-                            <Stack direction='row' spacing={{base:1, md:5}}>
-                                {environmentList.map((environment, index) => {
-                                    return(
-                                        <IconRow
-                                            item={environment}
-                                            key={index}
-                                        />
-                                    )
-                                })}
-                            </Stack>
-                        </Center>
-                    </Box>
+                    <ToolsBox/>
                 </Box>
             </VStack>
         </Box>
