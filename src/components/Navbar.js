@@ -14,6 +14,8 @@ const Navbar = () => {
     const { colorMode, toggleColorMode } = useColorMode()
 
     const navbarColor = useColorModeValue('white', 'teal.500');
+    const navbarShadow = useColorModeValue('md', 'dark-lg');
+    const activeBorderColor = useColorModeValue('teal.500', 'white');
 
     const [isOpen, setIsOpen] = React.useState(false)
 
@@ -22,19 +24,11 @@ const Navbar = () => {
     const MenuToggle = ({ toggle, isOpen }) => {
         return (
             <Box display={{ base: "block", md: "none" }} onClick={toggle}
-            className='hover:cursor-pointer hover:scale-110'>
+            className='hover:cursor-pointer hover:scale-110 transition-transform duration-200'>
                 {isOpen ? <Icon as={MdClose} w={35} h={35}/> : <Icon as={MdMenu} w={35} h={35} />}
             </Box>
         )
     }
-
-    //tailwind className for light/dark mode
-    const hoverNavbar = useColorModeValue(
-        'hover:bg-teal-500 hover:text-white',
-        'hover:bg-white hover:text-teal-600'
-    )
-
-
 
     var sectionList = data_sections.map((item, index) => {
         return (
@@ -48,56 +42,91 @@ const Navbar = () => {
     })
     function Section({sectionName, pageLink}){
         const currentLocation = useLocation().pathname;
+        const isActive = currentLocation === "/"+pageLink;
         
         return (
             <Link to={pageLink}>
-                {/* <DarkMode>  */}
-                    <Box p={5}  
+                <Box 
+                    p={[3, 5, 5, 5]}
+                    position='relative'
                     color={colorMode === 'light' ? 
-                        (currentLocation === "/"+pageLink ? "white" : "black") : 
-                        (currentLocation === "/"+pageLink ? "teal.500" : "white")}
+                        (isActive ? "white" : "black") : 
+                        (isActive ? "teal.500" : "white")}
                     backgroundColor={colorMode === 'light' ? 
-                        (currentLocation === "/"+pageLink ? "teal.500" : navbarColor) : 
-                        (currentLocation === "/"+pageLink ? "white" : navbarColor)}
-                    className={hoverNavbar}
-                    borderRadius={10}
+                        (isActive ? "teal.500" : "transparent") : 
+                        (isActive ? "white" : "transparent")}
+                    borderRadius={6}
                     alignSelf='center'
-                    >
-                        <Heading fontSize={{ base: 'sm', md: 'lg' }}>{sectionName}</Heading>
-
-                    </Box>
-
-                {/* </DarkMode> */}
+                    transition='all 0.2s ease-in-out'
+                    _hover={!isActive ? {
+                        backgroundColor: colorMode === 'light' ? "teal.400" : "rgba(255,255,255,0.1)",
+                        transform: 'translateY(-2px)',
+                    } : {}}
+                    borderBottom={isActive ? `3px solid ${activeBorderColor}` : 'none'}
+                >
+                    <Heading fontSize={{ base: 'sm', md: 'md' }} fontWeight={isActive ? 'bold' : 'semibold'}>
+                        {sectionName}
+                    </Heading>
+                </Box>
             </Link>
         )
     }
 
     return(
-        <Flex as="nav" align='center' justify='center' wrap='wrap' position="fixed" w="100%" bgColor={navbarColor} top="0" zIndex='999'>
-            <MenuToggle toggle={toggle} isOpen={isOpen}/>
+        <Flex 
+            as="nav" 
+            align='center' 
+            justify='center'
+            wrap='wrap' 
+            position="fixed" 
+            w="100%" 
+            bgColor={navbarColor} 
+            top="0" 
+            zIndex='999'
+            boxShadow={navbarShadow}
+            px={[4, 6, 8, 10]}
+            py={[4, 2, 2, 2]}
+            minH={[16, 'auto', 'auto', 'auto']}
+        >
+            <Box position='absolute' left={[4, 6, 8, 10]} top='50%' transform='translateY(-50%)'>
+                <MenuToggle toggle={toggle} isOpen={isOpen}/>
+            </Box>
+            
             <Box
-            display={{ base: isOpen ? "block" : "none", md: "block" }}
-            flexBasis={{ base: "100%", md: "auto" }}
-            w='100%'
+                display={{ base: isOpen ? "block" : "none", md: "block" }}
+                flexBasis={{ base: "100%", md: "auto" }}
+                w={{ base: '100%', md: 'auto' }}
+                px={[4, 0, 0, 0]}
             >
-                <Stack spacing={0} align='center' justify='center' direction={["column", "row", "row", "row"]}
-                pt={[4, 4, 0, 0]} mx='auto'>
+                <Stack 
+                    spacing={[0, 2, 2, 3]} 
+                    align='center' 
+                    justify='center' 
+                    direction={["column", "row", "row", "row"]}
+                    pt={[4, 0, 0, 0]} 
+                    pb={[4, 0, 0, 0]}
+                    mx='auto'
+                    w='100%'
+                >
                     {sectionList}
-                    <Box //dark mode button
-                        onClick={toggleColorMode}
-                        className="hover:rotate-45 duration-100 cursor-pointer"
-                        p={1}
-                        alignSelf='center'
-                        >
-                        {colorMode === 'light' ? (
-                            <Icon as={BsSun} w={45} h={45} color="black"/>
-                        ) : (
-                            <Icon as={MdOutlineDarkMode} w={45} h={45} color="white"/>
-                        )}
-                    </Box>
                 </Stack>
             </Box>
 
+            <Box
+                position='absolute'
+                right={[4, 6, 8, 10]}
+                top='50%'
+                transform='translateY(-50%)'
+                onClick={toggleColorMode}
+                className="hover:rotate-45 hover:scale-110 duration-200 transition-transform cursor-pointer"
+                p={2}
+            >
+                {colorMode === 'light' ? (
+                    <Icon as={BsSun} w={[30, 35, 35, 35]} h={[30, 35, 35, 35]} color="black"/>
+                ) : (
+                    <Icon as={MdOutlineDarkMode} w={[30, 35, 35, 35]} h={[30, 35, 35, 35]} color="white"/>
+                )}
+            </Box>
         </Flex>
     )
 }
