@@ -88,12 +88,12 @@ const Navbar = () => {
             py={[4, 2, 2, 2]}
             minH={[16, 'auto', 'auto', 'auto']}
         >
-            <Box position='absolute' left={[4, 6, 8, 10]} top='50%' transform='translateY(-50%)'>
+            <Box position={{ base: 'absolute', md: 'relative' }} left={[4, 'auto', 'auto', 'auto']} display={{ base: 'block', md: 'none' }}>
                 <MenuToggle toggle={toggle} isOpen={isOpen}/>
             </Box>
             
             <Box
-                display={{ base: isOpen ? "block" : "none", md: "block" }}
+                display={{ base: isOpen ? "block" : "none", md: "flex" }}
                 flexBasis={{ base: "100%", md: "auto" }}
                 w={{ base: '100%', md: 'auto' }}
                 px={[4, 0, 0, 0]}
@@ -109,14 +109,26 @@ const Navbar = () => {
                     w='100%'
                 >
                     {sectionList}
+                    <Box
+                        display={{ base: 'none', md: 'block' }}
+                        onClick={toggleColorMode}
+                        className="hover:rotate-45 hover:scale-110 duration-200 transition-transform cursor-pointer"
+                        p={2}
+                        ml={{ md: 2, lg: 4 }}
+                    >
+                        {colorMode === 'light' ? (
+                            <Icon as={BsSun} w={35} h={35} color="black"/>
+                        ) : (
+                            <Icon as={MdOutlineDarkMode} w={35} h={35} color="white"/>
+                        )}
+                    </Box>
                 </Stack>
             </Box>
 
             <Box
+                display={{ base: 'block', md: 'none' }}
                 position='absolute'
                 right={[4, 6, 8, 10]}
-                top='50%'
-                transform='translateY(-50%)'
                 onClick={toggleColorMode}
                 className="hover:rotate-45 hover:scale-110 duration-200 transition-transform cursor-pointer"
                 p={2}
